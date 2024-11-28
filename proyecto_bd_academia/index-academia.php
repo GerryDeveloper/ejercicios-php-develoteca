@@ -15,7 +15,7 @@
 
 <div class="container" id="draggable">
 
-    <img src="images/image.png" alt="">
+    <img src="images/image.png" alt="" >
 
     <h1>Bienvenido</h1>
     <div class="tabs">
