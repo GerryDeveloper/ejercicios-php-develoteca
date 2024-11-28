@@ -75,3 +75,27 @@ button {
 .container:active {
     cursor: grabbing;
 }
+
+
+.container {
+    position: relative;
+    transition: transform 0.4s ease; /* Suave retorno al soltar */
+    cursor: grab;
+}
+
+.container:active {
+    cursor: grabbing;
+    animation: jump 0.4s ease; /* Efecto de salto */
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px); /* Salto de 10px hacia arriba */
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
