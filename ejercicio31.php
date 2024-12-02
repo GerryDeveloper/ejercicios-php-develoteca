@@ -11,7 +11,7 @@
  *  - recuperarla de la base de datos
  * 
  * - forma de recepcionar los datos
- */
+ **/
 
 $txtNombre = "";
 $rdgLenguaje = ""; // rdg = radio group
@@ -21,6 +21,8 @@ $chkhtml="";
 $chkcss="";
 
 $lsSerie="";
+$txtComentario="";
+
 
 if ($_POST) { // si hay un envio?
   $txtNombre = (isset($_POST['txtNombre'])) ? $_POST['txtNombre'] : "juan"; // if ternario
@@ -39,6 +41,13 @@ if ($_POST) { // si hay un envio?
   echo "Lenguaje: <br>";
   print_r($rdgLenguaje);
   echo "<br>";
+
+  echo "<br>";
+  $txtComentario = (isset($_POST['txtComentario'])) ? $_POST['txtComentario'] : "";
+  // instruccion de insertar
+  // rutina de algun calculo
+  // alterar esos valores para mostrar diferentes valores modificados
+  
 }
 
 ?>
@@ -69,6 +78,8 @@ if ($_POST) { // si hay un envio?
    <strong>Estas viendo la serie de: </strong>
    <?php echo $lsSerie; ?>
    <br>
+    <strong> Tu mensaje es:  </strong> <?php echo $txtComentario; ?>
+
   <?php } ?>
 
   <form action="ejercicio31.php" method="post">
@@ -103,6 +114,16 @@ if ($_POST) { // si hay un envio?
     <option value="seriec" <?php echo ($lsSerie=="seriec") ? "selected" : ""; ?> >Serie C</option>
   </select>
   <br>
+  <!-- 4:19:56 text area continuacion-->
+  ¿Tienes alguna Duda?<br>
+  <textarea name="txtComentario" id="" cols="30" rows="10">
+
+  <?php echo $txtComentario; ?>
+
+  </textarea>
+  <br>
+
+
   <input type="submit" value="Enviar informacion">
 
   </form>
@@ -142,7 +163,7 @@ if ($_POST) { // si hay un envio?
   }
   
   // Ejemplo de uso
-  echo generarCadenaAleatoria();
+  // echo generarCadenaAleatoria();
    ?> 
 </body>
 
