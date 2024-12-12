@@ -1,0 +1,1 @@
+Hola, saudos desde archivo creado en PHP

@@ -7,13 +7,19 @@
 </head>
 <body>
 
-<?php
+<!-- video 36. include -->
+<?php include_once "ejercicio36_1.php"; ?>
+<?php include_once "ejercicio36_1.php"; ?>
 
-// video 36. include
+<?php echo "<br>"."Hola, estoy en la pagina principal (v36)"; ?>
 
-include "ejercicio36_1.php";
 
-?>
+<!-- el include
+ - lo que hace si hay errores es:
+muestra un warning pero va a seguir mostrando lo que son las siguientes instrucciones 
+
+- si el REQUIRE tiene un error, la ejecucion termina
+- el INCLUDE continua aun con errores -->
 
 </body>
 </html>
