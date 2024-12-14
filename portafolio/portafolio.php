@@ -2,6 +2,26 @@
 // min 06:06 -> crear tabla mysql
 // video para crear la bd:    Phpmyadmin Crear base de Datos 02:59:36
 ?>
+<?php include "conexion.php" ?>
+
+<?php 
+
+if ($_POST) {
+
+  print_r($_POST);
+
+  $nombre = $_POST["nombre"]; // recepcionamos el nombre del proyecto con una variable
+
+  $objConexion = new conexion(); // instancia de la clase conexion
+
+  $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) 
+  VALUES (NULL, '$nombre', 'imagen.jpg', 'Es un proyecto de hace mucho tiempo');";
+
+  $objConexion->ejecutar($sql);
+  // 06:24:56 determinacom con el codigo de conexion que todo esta correcto
+
+}
+?>
 
 <div class="container">
   <div class="row">
@@ -16,7 +36,7 @@
           Datos del proyecto
         </div>
         <div class="card-body">
-          <form action="portafolio.php" method="post">
+          <form action="portafolio.php" method="post" enctype="multipart/form-data">
 
             Nombre del proyecto: <input class="form-control" type="text" name="nombre" id="">
             <br>
@@ -48,11 +68,7 @@
               <td>Aplicacion web</td>
               <td>imagen.jpg</td>
             </tr>
-            <tr class="">
-              <td scope="row">Item</td>
-              <td>Item</td>
-              <td>Item</td>
-            </tr>
+           
           </tbody>
         </table>
       </div>
