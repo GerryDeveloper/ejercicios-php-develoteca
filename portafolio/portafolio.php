@@ -18,9 +18,31 @@ if ($_POST) {
   VALUES (NULL, '$nombre', 'imagen.jpg', 'Es un proyecto de hace mucho tiempo');";
 
   $objConexion->ejecutar($sql);
-  // 06:24:56 determinacom con el codigo de conexion que todo esta correcto
+  // $id=$objConexion->ejecutar($sql); // recordar que este metodo devuelve el id insertado
+
+  // 06:24:56 determinacom con el codigo de conexion que todo esta correcto (this was on someday)
+  // started again on 15/12/24
+}
+
+if ($_GET){
+
+  // "DELETE FROM proyectos WHERE `proyectos`.`id` = 15"
+
+  $id = $_GET['borrar']; // la razon de separar es para validar el id, si es numero, si es valido, etc
+
+  $objConexion = new conexion();
+  // $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$_GET['borrar'];
+  $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
+  $objConexion->ejecutar($sql);
+
 
 }
+
+$objConexion = new conexion();
+$proyectos = $objConexion->consultar("SELECT * FROM `proyectos`");
+
+// print_r($proyectos);
+
 ?>
 
 <div class="container">
@@ -60,14 +82,29 @@ if ($_POST) {
               <th scope="col">ID</th>
               <th scope="col">Nombre Proyecto</th>
               <th scope="col">Imagen</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
+
+            <!-- este tr es el que vamos a repetir dependiendo la cantidad de registros -->
+            <?php foreach($proyectos as $proyecto) { ?>
             <tr class="">
-              <td scope="row">3</td>
-              <td>Aplicacion web</td>
-              <td>imagen.jpg</td>
+              <td><?php echo $proyecto['id']; ?></td>
+              <td><?php echo $proyecto['nombre']; ?></td>
+              <td><?php echo $proyecto['imagen']; ?></td>
+              <td><?php echo $proyecto['descripcion']; ?></td>
+              <td> <a
+                name=""
+                id=""
+                class="btn btn-danger"
+                href="?borrar=<?php echo $proyecto['id']; ?>"
+                role="button"
+                >Eliminar</a>
+               </td>
             </tr>
+            <?php } ?>
            
           </tbody>
         </table>

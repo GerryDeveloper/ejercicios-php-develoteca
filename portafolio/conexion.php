@@ -20,12 +20,23 @@ class conexion {
   }
 
   // metodos
-  public function ejecutar($sql) {
+  public function ejecutar($sql) { // insertar/delete/actualizar
 
     $this->conexion->exec($sql);
     return $this->conexion->lastInsertId();
 
   }
+
+  public function consultar($sql) {
+
+    $sentencia=$this->conexion->prepare($sql); // prepare() prepara una consulta sql para su ejecucion
+    $sentencia->execute();
+
+    return $sentencia->fetchAll(); // retorna todos los registros que tu puedas consultar con la sentencia $sql
+
+  }
+
+
 
 }
 
