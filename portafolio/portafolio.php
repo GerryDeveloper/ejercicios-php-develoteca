@@ -20,14 +20,13 @@ if ($_POST) {
 
   move_uploaded_file($imagen_temporal, "imagenes/".$imagen); // mueve el $archivo_temporal a el nombre de la $imagen
 
-
   $objConexion = new conexion(); // instancia de la clase conexion
-
   $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) 
   VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
-
   $objConexion->ejecutar($sql);
   // $id=$objConexion->ejecutar($sql); // recordar que este metodo devuelve el id insertado
+
+  header("location:portafolio.php");
 
   // 06:24:56 determinacom con el codigo de conexion que todo esta correcto (this was on someday)
   // started again on 15/12/24
@@ -49,6 +48,7 @@ if ($_GET){
    $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
   $objConexion->ejecutar($sql);
 
+  header("location:portafolio.php");
 
 }
 
@@ -74,12 +74,12 @@ $proyectos = $objConexion->consultar("SELECT * FROM `proyectos`");
         <div class="card-body">
           <form action="portafolio.php" method="post" enctype="multipart/form-data">
 
-            Nombre del proyecto: <input class="form-control" type="text" name="nombre" id="">
+            Nombre del proyecto: <input required class="form-control" type="text" name="nombre" id="">
             <br>
-            Imagen del proyecto: <input class="form-control" type="file" name="archivo" id="">
+            Imagen del proyecto: <input required class="form-control" type="file" name="archivo" id="">
             <br>
             Descripcion:
-            <textarea class="form-control" name="descripcion" id="" rows="3"></textarea>
+            <textarea required class="form-control" name="descripcion" id="" rows="3"></textarea>
             <br>
             
 
@@ -111,7 +111,12 @@ $proyectos = $objConexion->consultar("SELECT * FROM `proyectos`");
             <tr class="">
               <td><?php echo $proyecto['id']; ?></td>
               <td><?php echo $proyecto['nombre']; ?></td>
-              <td><?php echo $proyecto['imagen']; ?></td>
+              <td>
+              
+              <img width="100" src="imagenes/<?php echo $proyecto['imagen']; ?>" alt="" srcset="">
+
+            
+              </td>
               <td><?php echo $proyecto['descripcion']; ?></td>
               <td> <a
                 name=""
