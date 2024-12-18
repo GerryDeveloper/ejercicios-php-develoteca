@@ -8,14 +8,23 @@
 
 if ($_POST) {
 
-  print_r($_POST);
+  // print_r($_POST);
 
   $nombre = $_POST["nombre"]; // recepcionamos el nombre del proyecto con una variable
+  $descripcion = $_POST['descripcion']; // descripcion
+
+  $fecha = new DateTime();
+  $imagen = $fecha->getTimestamp()."_".$_FILES['archivo']['name']; // hora en milisegundos
+  // 06:58 -> adjuntar imagenes, lo haremos agregandolas a una carpeta
+  $imagen_temporal = $_FILES['archivo']['tmp_name'];
+
+  move_uploaded_file($imagen_temporal, "imagenes/".$imagen); // mueve el $archivo_temporal a el nombre de la $imagen
+
 
   $objConexion = new conexion(); // instancia de la clase conexion
 
   $sql="INSERT INTO `proyectos` (`id`, `nombre`, `imagen`, `descripcion`) 
-  VALUES (NULL, '$nombre', 'imagen.jpg', 'Es un proyecto de hace mucho tiempo');";
+  VALUES (NULL, '$nombre', '$imagen', '$descripcion');";
 
   $objConexion->ejecutar($sql);
   // $id=$objConexion->ejecutar($sql); // recordar que este metodo devuelve el id insertado
@@ -29,10 +38,15 @@ if ($_GET){
   // "DELETE FROM proyectos WHERE `proyectos`.`id` = 15"
 
   $id = $_GET['borrar']; // la razon de separar es para validar el id, si es numero, si es valido, etc
-
   $objConexion = new conexion();
+
+  $imagen = $objConexion->consultar("SELECT imagen FROM `proyectos` WHERE id = ".$id);
+  // print_r($imagen[0]['imagen']); // para saber si se devuelve la imagen que se va a borrar
+
+  unlink("imagenes/".$imagen[0]['imagen']); 
+
   // $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$_GET['borrar'];
-  $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
+   $sql = "DELETE FROM proyectos WHERE `proyectos`.`id` =".$id;
   $objConexion->ejecutar($sql);
 
 
@@ -64,6 +78,10 @@ $proyectos = $objConexion->consultar("SELECT * FROM `proyectos`");
             <br>
             Imagen del proyecto: <input class="form-control" type="file" name="archivo" id="">
             <br>
+            Descripcion:
+            <textarea class="form-control" name="descripcion" id="" rows="3"></textarea>
+            <br>
+            
 
             <input class="btn btn-success" type="submit" value="Enviar proyecto">
 
