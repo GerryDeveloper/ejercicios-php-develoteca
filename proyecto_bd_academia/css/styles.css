@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(128, 0, 128, 0.5), #1e1e1e); /* Fondo degradado */
+}
+
+.container {
+    width: 60%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.6); /* Blanco más transparente */
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    position: relative;
+    transition: transform 0.4s ease; /* Animación suave */
+}
+
+h1 {
+    color: white;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+
+.tab.active {
+    background-color: #aaa;
+}
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: rgba(128, 0, 128, 0.8); /* Morado más tenue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@keyframes jumpEffect {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(var(--jump-x, 0px), var(--jump-y, 0px));
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/** imagen */
+
+img {
+    border-radius: 25%;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Pestañas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: purple;
+        }
+        .container {
+            width: 60%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Blanco transparente */
+            border-radius: 10px;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #bbb;
+        }
+        .form {
+            display: none;
+        }
+        .form.active {
+            display: block;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: purple;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Bienvenido</h1>
+    <div class="tabs">
+        <div class="tab active" onclick="showForm('alumno')">Alumno</div>
+        <div class="tab" onclick="showForm('profesor')">Profesor</div>
+        <div class="tab" onclick="showForm('administrador')">Administrador</div>
+    </div>
+
+    <div id="alumno" class="form active">
+        <form>
+            <input type="text" placeholder="Número de Control" required><br>
+            <input type="password" placeholder="Contraseña" required><br>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <div id="profesor" class="form">
+        <form>
+            <input type="text" placeholder="Clave Profesor" required><br>
+            <input type="password" placeholder="Contraseña" required><br>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <div id="administrador" class="form">
+        <form>
+            <input type="text" placeholder="Nombre Administrador" required><br>
+            <input type="password" placeholder="Contraseña" required><br>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showForm(id) {
+        // Ocultar todos los formularios
+        const forms = document.querySelectorAll('.form');
+        forms.forEach(form => form.classList.remove('active'));
+
+        // Mostrar el formulario seleccionado
+        document.getElementById(id).classList.add('active');
+
+        // Cambiar la pestaña activa
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
