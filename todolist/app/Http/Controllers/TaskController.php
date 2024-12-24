@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\task;
+use App\Models\task; // modelo ya incluido
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,7 +12,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $task['tasks'] = Task::all();
+
+        return view('task.index', $task);
+        // return view('welcome');
     }
 
     /**
@@ -29,6 +32,11 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         //
+        $task = request()->all(); // todo lo que se envie en el formulario, aqui esta definido
+        Task::create($task);
+        
+        // retornamos a donde sea que queramos (vistas por ejemplo)
+        return redirect('/');
     }
 
     /**
@@ -58,8 +66,13 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(task $task)
+    // public function destroy(task $task)
+    public function destroy($id)
     {
         //
+        // return redirect('/');
+        $task = Task::findOrFail($id);
+        $task->delete();
+        return redirect('/');
     }
 }
